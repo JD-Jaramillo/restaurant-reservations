@@ -1,0 +1,25 @@
+{
+  "name": "restaurant-reservations",
+  "version": "1.0.0",
+  "description": "Works with Node.JS and Express to create restaurant reservations as well as a waiting list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JD-Jaramillo/restaurant-reservations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JD-Jaramillo/restaurant-reservations/issues"
+  },
+  "homepage": "https://github.com/JD-Jaramillo/restaurant-reservations#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
