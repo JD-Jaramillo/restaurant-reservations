@@ -19,17 +19,31 @@ const tabledata = [
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
 
-app.get('/reservations', (req, res) => res.sendFile(path.join(__dirname, 'reservation.html')));
+app.get('/reservations', (req, res) => res.sendFile(path.join(__dirname, 'reservations.html')));
 
 app.get('/api/tabledata', (req, res) => res.json(tabledata));
+
+app.get('/api/tabledata/:tabledata', (req, res) => {
+    const chosen = req.params.character;
+
+    console.log(chosen);
+
+    /* Check each character routeName and see if the same as "chosen"
+     If the statement is true, send the character back as JSON,
+     otherwise tell the user no character was found */
+
+    for (let i = 0; i < characters.length; i++) {
+        if (chosen === characters[i].routeName) {
+            return res.json(characters[i]);
+        }
+    }
+
+    return res.json(false);
+});
 
 app.post('/api/tabledata', (req, res) => {
     const newTableData = req.body;
 
-    newTableData.routeName = newTableData.name.replace(/\s+/g, '').toLowerCase();
-    newTableData.routeEmail = newTableData.email.replace(/\s+/g, '').toLowerCase();
-    newTableData.routePhone = newTableData.phoneNumber.replace(/\s+/g, '').toLowerCase();
-    newTableData.routeId = newTableData.id.replace(/\s+/g, '').toLowerCase();
     console.log(newTableData);
 
     tabledata.push(newTableData);
