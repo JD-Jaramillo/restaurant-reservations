@@ -17,27 +17,24 @@ const tabledata = [
     },
 ];
 
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
+const waitlistData = [];
 
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
 app.get('/reservations', (req, res) => res.sendFile(path.join(__dirname, 'reservations.html')));
+app.get('/tables', (req, res) => res.sendFile(path.join(__dirname, 'tables.html')));
 
 app.get('/api/tabledata', (req, res) => res.json(tabledata));
+app.get('/api/waitlistData', (req, res) => res.json(waitlistData));
 
 app.get('/api/tabledata/:tabledata', (req, res) => {
-    const chosen = req.params.character;
+    const inputed = req.params.tabledata;
+    console.log(inputed);
 
-    console.log(chosen);
-
-    /* Check each character routeName and see if the same as "chosen"
-     If the statement is true, send the character back as JSON,
-     otherwise tell the user no character was found */
-
-    for (let i = 0; i < characters.length; i++) {
-        if (chosen === characters[i].routeName) {
-            return res.json(characters[i]);
+    for (let i = 0; i < tabledata.length; i++) {
+        if (inputed === tabledata[i].routeName) {
+            return res.json(tabledata[i]);
         }
     }
-
     return res.json(false);
 });
 
@@ -49,7 +46,6 @@ app.post('/api/tabledata', (req, res) => {
     tabledata.push(newTableData);
     res.json(newTableData);
 });
-
 
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
